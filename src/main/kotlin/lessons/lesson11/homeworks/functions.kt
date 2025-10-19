@@ -30,7 +30,7 @@ private fun nullableLength(s: String?): Int? = s?.length
 public fun getMaybeDouble(): Double? = null
 
 //7. Принимает nullable список целых чисел, не возвращает значения и доступна только в текущем файле.
-private fun nullableList(numbers: Int): Unit {}
+private fun nullableList(numbers: List<Int>?): Unit {}
 
 //8. Принимает целое число и возвращает nullable строку.
 public fun intOrNull(n: Int): String? = n.toString()
