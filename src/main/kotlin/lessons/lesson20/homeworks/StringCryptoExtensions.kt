@@ -1,0 +1,8 @@
+package org.example.lessons.lesson20.homeworks
+
+// Простейший "шифр": сдвиг по Unicode
+fun String.encrypt(base: Int): String =
+    this.map { (it.code + base).toChar() }.joinToString("")
+
+fun String.decrypt(base: Int): String =
+    this.map { (it.code - base).toChar() }.joinToString("")
