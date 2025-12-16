@@ -2,10 +2,12 @@ package org.example.lessons.lesson25.homeworks
 
 /* ---------- Задание 1. Функция высшего порядка: timeTracker ---------- */
 
-fun timeTracker(block: () -> Unit): Long {
+// Возвращаем пару: (время выполнения, результат блока)
+inline fun <T> timeTracker(block: () -> T): Pair<Long, T> {
     val start = System.currentTimeMillis()
-    block()
-    return System.currentTimeMillis() - start
+    val result = block()
+    val elapsed = System.currentTimeMillis() - start
+    return elapsed to result
 }
 
 /* ---------- Классы для заданий 2–6 ---------- */
@@ -80,14 +82,13 @@ fun Person?.toEmployee(position: String): Employee? =
 /* ---------- Небольшое демо всего выше ---------- */
 
 fun main() {
-    // Задание 1: timeTracker
-    val myFunction = {
+    // Задание 1: timeTracker (вариант B: получаем и время, и результат)
+    val (ms, sorted) = timeTracker {
         // при желании можно увеличить до 10_000_000, но это может занять время
         val list = List(1_000_000) { (0..10_000).random() }
         list.sorted()
     }
-    val ms = timeTracker(myFunction)
-    println("timeTracker: блок выполнился за ${ms} мс")
+    println("timeTracker: блок выполнился за ${ms} мс, first=${sorted.firstOrNull()}")
 
     // Задание 2: apply
     val e1 = createEmployeeWithApply()
